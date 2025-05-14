@@ -11,7 +11,7 @@
     }
 }
 
-<form asp-action="@(isEdit ? "Update" : "Create")" method="post">
+<form asp-action="@(isEdit ? "Edit" : "Create")" method="post">
     @if(isEdit){
         <input asp-for="AuthorId" hidden />
     }

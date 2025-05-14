@@ -49,18 +49,18 @@ namespace Library_System.Controllers
             }
 
         }
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             var author = await authorService.GetAuthorByIdAsync(id);
             if (author == null)
             {
-                return NotFound();
+                return NotFound($"Author with ID: {id} is not found.");
             }
             AddAuthorViewModel authorViewModel = mapper.Map<AddAuthorViewModel>(author);
             return View("Create", authorViewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> Update(AddAuthorViewModel author)
+        public async Task<IActionResult> Edit(AddAuthorViewModel author)
         {
             try
             {

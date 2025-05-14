@@ -1,23 +1,19 @@
-﻿using Domain.Entities;
-using Domain.Enums;
-using System;
-using System.Collections.Generic;
+﻿using Domain.Enums;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Business.DTOs
+namespace Library_System.ViewModels
 {
-    public class GetBookDTO
+    public class GetBookViewModel
     {
         public int BookId { get; internal set; }
+        [Required, StringLength(100, MinimumLength =3)]
         public required string BookTitle { get; set; }
+        [EnumDataType(typeof(Genre))]
         public Genre Genre { get; set; }
+        [MaxLength(300)]
         public string? Description { get; set; }
 
         public bool IsAvailable { get; set; }
         public required string AuthorName { get; set; }
-        public virtual ICollection<BorrowingRecord> BorrowingRecords { get; set; } = new HashSet<BorrowingRecord>();
     }
 }

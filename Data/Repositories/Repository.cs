@@ -45,13 +45,9 @@ namespace Data.Repositories
             return await Task.FromResult(context.Set<T>().AsQueryable());
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
             T? entity = await context.Set<T>().FindAsync(id);
-            if(entity == null)
-            {
-                throw new NotFoundException($"{typeof(T).Name} with ID: {id} is not found");
-            }
             return entity;
         }
 

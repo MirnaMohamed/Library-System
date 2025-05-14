@@ -49,8 +49,8 @@ namespace Business.Services.Implementation
 
         public async Task DeleteAuthorAsync(int id)
         {
-            Author author = await unitOfWork.AuthorsRepository.GetByIdAsync(id);
-            if (author.Books.Count > 0)
+            Author? author = await unitOfWork.AuthorsRepository.GetByIdAsync(id);
+            if ( author!= null && author.Books.Count > 0)
             {
                 throw new InvalidOperationException($"Author with id {id} cannot be deleted because they have books." +
                     " Consider deleting their books first.");
@@ -75,9 +75,9 @@ namespace Business.Services.Implementation
             return authorDtos;
         }
 
-        public async Task<GetAuthorDto> GetAuthorByIdAsync(int id)
+        public async Task<GetAuthorDto?> GetAuthorByIdAsync(int id)
         {
-            Author author = await unitOfWork.AuthorsRepository.GetByIdAsync(id);
+            Author? author = await unitOfWork.AuthorsRepository.GetByIdAsync(id);
             return mapper.Map<GetAuthorDto>(author);
         }
 

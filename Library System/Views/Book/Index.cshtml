@@ -1,0 +1,38 @@
+﻿@model List<GetBookViewModel> 
+
+@{
+    ViewData["Title"] = "Book List";
+}
+
+<a asp-action="Create" class="btn btn-primary">Add Book</a>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr class="row d-flex flex-wrap">
+            <th class="col-2">Title</th>
+            <th class="col-3">Description</th>
+            <th class="col-2">Author Name</th>
+            <th class="col-2">Genre</th>
+            <th class="col-1">Available</th>
+            <th class="col-2">
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody >
+        @foreach( var book in Model)
+        {
+
+            <tr class="row d-flex flex-wrap">
+                <td class="col-2">@book.BookTitle</td>
+                <td class="col-3 text-wrap">@book.Description</td>
+                <td class="col-2">@book.AuthorName</td>
+                <td class="col-2">@book.Genre</td>
+                <td class="col-1">@book.IsAvailable</td>
+                <td class="col-2">
+                    @Html.ActionLink("Edit", "Edit", new { id = book.BookId })
+                    @Html.ActionLink("Delete", "Delete", new { id = book.BookId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

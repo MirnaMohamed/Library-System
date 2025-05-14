@@ -22,8 +22,9 @@ namespace Library_System.Mapper
 
 
 
-            CreateMap<GetBookDTO, BookViewModel>();
-            CreateMap<BookViewModel, AddBookDTO>();
+            CreateMap<GetBookDTO, GetBookViewModel>();
+            CreateMap<GetBookDTO, AddBookViewModel>();
+            CreateMap<AddBookViewModel, AddBookDTO>();
         }
     }
 }

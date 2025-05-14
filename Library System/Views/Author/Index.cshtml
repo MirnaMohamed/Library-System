@@ -23,7 +23,7 @@
                 <td><a asp-action="Details" asp-route-id="@author.AuthorId" class="">@author.Biography</a></td>
                 <td>@author.PersonalWebsite</td>
                 <td>
-                    @Html.ActionLink("Edit", "Update", new { id = author.AuthorId })
+                    @Html.ActionLink("Edit", "Edit", new { id = author.AuthorId })
                     @Html.ActionLink("Delete", "Delete", new { id = author.AuthorId })
                 </td>
             </tr>

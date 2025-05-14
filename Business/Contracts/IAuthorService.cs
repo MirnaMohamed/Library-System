@@ -5,7 +5,7 @@ namespace Business.Contracts
     public interface IAuthorService
     {
         Task<List<GetAuthorDto>> GetAllAuthorsAsync();
-        Task<GetAuthorDto> GetAuthorByIdAsync(int id);
+        Task<GetAuthorDto?> GetAuthorByIdAsync(int id);
         Task CreateAuthorAsync(AuthorDTO author);
         Task UpdateAuthorAsync(int id, AuthorDTO author);
         Task DeleteAuthorAsync(int id);

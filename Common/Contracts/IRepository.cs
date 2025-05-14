@@ -8,7 +8,7 @@ namespace Common.Contracts
 {
     public interface IRepository<T> where T: class
     {
-        Task<T> GetByIdAsync(int id);
+        Task<T?> GetByIdAsync(int id);
         Task<IQueryable<T>> GetAllAsync();
         Task<bool> Exists(int id);
         Task AddAsync(T entity);

@@ -21,7 +21,7 @@ namespace Services.Mapper
                     dest.AuthorName = src.Author.FullName;
                 });
             CreateMap<AddBookDTO, Book>()
-                .ForMember( (dest) => dest.Title, src => src.MapFrom("BookTitle") );
+                .ForMember( (dest) => dest.Title, src => src.MapFrom(src=> src.BookTitle) );
 
             CreateMap<AuthorDTO, Author>()
                 .AfterMap((src, dest) => {
