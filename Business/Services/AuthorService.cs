@@ -49,6 +49,12 @@ namespace Business.Services.Implementation
 
         public async Task DeleteAuthorAsync(int id)
         {
+            Author author = await unitOfWork.AuthorsRepository.GetByIdAsync(id);
+            if (author.Books.Count > 0)
+            {
+                throw new InvalidOperationException($"Author with id {id} cannot be deleted because they have books." +
+                    " Consider deleting their books first.");
+            }
             try
             {
                 await unitOfWork.AuthorsRepository.Delete(id);

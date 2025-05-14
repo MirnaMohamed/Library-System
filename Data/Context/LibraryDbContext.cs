@@ -1,5 +1,4 @@
-﻿using Bogus;
-using Castle.Core.Resource;
+﻿using Castle.Core.Resource;
 using Domain.Entities;
 using Domain.Enums;
 using Microsoft.EntityFrameworkCore;
