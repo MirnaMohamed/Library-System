@@ -1,0 +1,32 @@
+﻿@model List<GetAuthorViewModel>
+<a asp-action="Create" asp-controller="Author" class="btn btn-primary">Add Author</a>
+
+<h1>Authors List</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Biography</th>
+            <th>Website</th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var author in Model)
+        {
+            <tr>
+                <td><a asp-action="Details" asp-route-id="@author.AuthorId" class="">@author.FullName</a></td>
+                <td><a asp-action="Details" asp-route-id="@author.AuthorId" class="">@author.UserEmail</a></td>
+                <td><a asp-action="Details" asp-route-id="@author.AuthorId" class="">@author.Biography</a></td>
+                <td>@author.PersonalWebsite</td>
+                <td>
+                    @Html.ActionLink("Edit", "Update", new { id = author.AuthorId })
+                    @Html.ActionLink("Delete", "Delete", new { id = author.AuthorId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

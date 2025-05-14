@@ -1,0 +1,24 @@
+﻿@model GetAuthorViewModel
+
+@{
+    ViewData["Title"] = "Author Details";
+}
+
+<div>
+    <a href="@Url.Action("Index", "Author")">Back to List</a>
+    <h1>@Model.FullName</h1>
+    <p><strong>Biography:</strong> @Model.Biography</p>
+    <p><strong>Email:</strong> @Model.UserEmail</p>
+    @if(Model.PersonalWebsite != null){
+        <p><strong>Website:</strong> @Model.PersonalWebsite</p>
+    }
+    <p><strong>Number of Published Books:</strong> @Model.BooksCount</p>
+    <ul>
+        @foreach (string book in Model.Books)
+        {
+            <li>
+                @book
+            </li>
+        }
+    </ul>
+</div>

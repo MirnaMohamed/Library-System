@@ -1,0 +1,72 @@
+﻿@model AddAuthorViewModel
+@{
+    bool isEdit = (Model != null && Model.AuthorId != -1);
+    if (isEdit)
+    {
+        ViewData["Title"] = "Update Author";
+    }
+    else
+    {
+        ViewData["Title"] = "Add Author";
+    }
+}
+
+<form asp-action="@(isEdit ? "Update" : "Create")" method="post">
+    @if(isEdit){
+        <input asp-for="AuthorId" hidden />
+    }
+    <div asp-validation-summary="ModelOnly">
+        
+    </div>
+    <div class="form-group row">
+        <label for="FirstName" class="col-2 col-form-label">First Name:</label>
+        <input asp-for="FirstName" class="form-control col-sm-10" required />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <label for="SecondName" class="col-2 col-form-label">Second Name:</label>
+        <input asp-for="SecondName" class="form-control col-sm-10" required />
+        <span asp-validation-for="SecondName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <label for="ThirdName" class="col-2 col-form-label">Third Name:</label>
+        <input asp-for="ThirdName" class="form-control col-5" required />
+        <span asp-validation-for="ThirdName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="LastName" class="col-2 col-form-label"></label>
+        <input asp-for="LastName" class="form-control col-sm-10" required />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="UserEmail" class="col-2 col-form-label"></label>
+        <input asp-for="UserEmail" class="form-control col-sm-10" required />
+        <span asp-validation-for="UserEmail" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Biography" class="col-2"></label>
+        <textarea asp-for="Biography" class="form-control col-sm-10" rows="3"></textarea>
+        <span asp-validation-for="Biography" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Website" class="col-2 col-form-label">Website:</label>
+        <input asp-for="PersonalWebsite" class="form-control col-sm-10" />
+        <span asp-validation-for="PersonalWebsite" class="text-danger"></span>
+    </div>
+
+    <input type="submit" value="submit" class="btn btn-success" />
+    
+
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
