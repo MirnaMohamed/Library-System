@@ -12,7 +12,7 @@
             <th class="col-3">Description</th>
             <th class="col-2">Author Name</th>
             <th class="col-2">Genre</th>
-            <th class="col-1">Available</th>
+            <th class="col-1">Status</th>
             <th class="col-2">
                 Actions
             </th>
@@ -23,11 +23,20 @@
         {
 
             <tr class="row d-flex flex-wrap">
-                <td class="col-2">@book.BookTitle</td>
+                <td class="col-2">
+                    <a class="text-decoration-none" asp-action="Details" asp-route-id="@book.BookId">@book.BookTitle</a>
+                </td>
                 <td class="col-3 text-wrap">@book.Description</td>
                 <td class="col-2">@book.AuthorName</td>
                 <td class="col-2">@book.Genre</td>
-                <td class="col-1">@book.IsAvailable</td>
+                <td class="col-1">
+                    @if (book.IsAvailable) {
+                        <span>Available</span>
+                    }
+                    else {
+                        <span><strong>Borrowed</strong></span>
+                    }
+                </td>
                 <td class="col-2">
                     @Html.ActionLink("Edit", "Edit", new { id = book.BookId })
                     @Html.ActionLink("Delete", "Delete", new { id = book.BookId })

@@ -1,0 +1,48 @@
+﻿@model Domain.Entities.BorrowingRecord
+@{
+    SelectList books = new SelectList(ViewBag.Books, "BookId", "BookTitle");
+
+    ViewData["Title"] = "Borrow a Book";
+}
+
+<form asp-action="RequestBorrow" method="post">
+    <div class="form-group">
+        <label asp-for="BookId" class="control-label"></label>
+        <select asp-for="BookId" class="form-control" asp-items="@books"></select>
+        <span asp-validation-for="BookId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BorrowDate" class="control-label"></label>
+        <input asp-for="BorrowDate" required />
+        <span asp-validation-for="BorrowDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success">"Add Borrow Request"</button>
+</form>
+
+@section Scripts {
+    <script>
+        document.getElementById("BookId").addEventListener("change", function () {
+            var bookId = this.value;
+            if (!bookId) return;
+
+            fetch(`/Books/GetAvailability?id=${bookId}`)
+                .then(response => response.json())
+                .then(data => {
+                    let statusElement = document.getElementById("availabilityStatus");
+                    let borrowBtn = document.getElementById("borrowBtn");
+
+                    if (data.isAvailable) {
+                        statusElement.textContent = "Available";
+                        statusElement.className = "text-success";
+                        borrowBtn.disabled = false;
+                    } else {
+                        statusElement.textContent = "Checked Out";
+                        statusElement.className = "text-danger";
+                        borrowBtn.disabled = true;
+                    }
+                });
+        });
+    </script>
+}

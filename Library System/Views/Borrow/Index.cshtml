@@ -1,0 +1,18 @@
+﻿@model List<GetBookViewModel>
+@{
+    ViewData["Title"] = "Borrow a Book";
+}
+<div class="text-center">
+    <h1 class="display-4">Borrow a Book</h1>
+    <div class="container">
+        @foreach (var book in Model)
+        {
+            <div class="card mb-3">
+                <partial name="../Shared/_BookDetailPartial" model="book">
+                    <a asp-action="RequestBorrow" asp-controller="Borrow"
+                       asp-route-id="@book.BookId" class="btn btn-primary @(book.IsAvailable ? "" : "disabled")">Borrow</a>
+                </partial>
+            </div>
+        }
+    </div>
+</div>

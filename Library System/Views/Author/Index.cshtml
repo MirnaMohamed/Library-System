@@ -4,27 +4,43 @@
 <h1>Authors List</h1>
 <table class="table table-bordered table-hover">
     <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Biography</th>
-            <th>Website</th>
-            <th>
+        <tr class="row">
+            <th class="col-2">Name</th>
+            <th class="col-3">Email</th>
+            <th class="col-3 text-wrap">Biography</th>
+            <th class="col-2 text-wrap">Website</th>
+            <th class="col-2">
                 Actions
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach(var author in Model)
+        @foreach (var author in Model)
         {
-            <tr>
-                <td><a asp-action="Details" asp-route-id="@author.AuthorId" class="">@author.FullName</a></td>
-                <td><a asp-action="Details" asp-route-id="@author.AuthorId" class="">@author.UserEmail</a></td>
-                <td><a asp-action="Details" asp-route-id="@author.AuthorId" class="">@author.Biography</a></td>
-                <td>@author.PersonalWebsite</td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = author.AuthorId })
-                    @Html.ActionLink("Delete", "Delete", new { id = author.AuthorId })
+            <tr class="row">
+                <td class="col-2  text-wrap">
+                    <a asp-action="Details" asp-route-id="@author.AuthorId" class="link-underline-opacity-0">
+                        @author.FullName
+                    </a>
+                </td>
+                <td class="col-3 text-wrap">
+                    <a asp-action="Details" asp-route-id="@author.AuthorId" class="link-underline-opacity-0">
+                        @author.UserEmail
+                    </a>
+                </td>
+                <td class="col-3 text-wrap">
+                    <a asp-action="Details" asp-route-id="@author.AuthorId" class="link-underline-opacity-0">
+                        @author.Biography
+                    </a>
+                </td>
+                <td class="col-2 text-wrap">
+                    <a asp-action="Details" asp-route-id="@author.AuthorId" class="link-underline-opacity-0">
+                        @author.PersonalWebsite
+                    </a>
+                </td>
+                <td class="col-2">
+                    <a asp-action="Edit" asp-route-id="@author.AuthorId" class="link-warning link-underline-opacity-0">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@author.AuthorId" class="link-underline-opacity-0 text-danger">Delete</a>
                 </td>
             </tr>
         }

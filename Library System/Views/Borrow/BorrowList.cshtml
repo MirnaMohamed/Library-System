@@ -1,0 +1,19 @@
+﻿@model List<Domain.Entities.BorrowingRecord>
+@{
+    ViewData["Title"] = "Borrowing Records";
+}
+<div class="text-center">
+    <h1 class="display-4">Borrow a Book</h1>
+    <div class="container">
+        @foreach (var record in Model)
+        {
+            <div class="card mb-3">
+                <p><strong>Book ID:</strong> @record.BookId</p>
+                <p><strong>Borrow Date:</strong> @record.BorrowDate</p>
+                <p>
+                    <strong>Return Date:</strong> @record.ReturnDate
+                </p>
+            </div>
+        }
+    </div>
+</div>

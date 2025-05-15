@@ -10,6 +10,7 @@ namespace Data.Context
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<BorrowingRecord> BorrowRecords { get; set; }
         public LibraryDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -28,6 +29,12 @@ namespace Data.Context
             authorModel.HasIndex(a => a.Email).IsUnique();
             authorModel.HasIndex(a => a.FullName).IsUnique();
 
+            modelBuilder.Entity<BorrowingRecord>()
+                .HasKey(b => new {b.BookId, b.BorrowDate});
+            modelBuilder.Entity<BorrowingRecord>()
+                .HasOne<Book>()
+                .WithMany(b => b.BorrowingRecords)
+                .HasForeignKey(borrow => borrow.BookId);
         }
     }
 }

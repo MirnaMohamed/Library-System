@@ -2,6 +2,7 @@
 using Business.DTOs;
 using Business.Services.Contracts;
 using Common.Contracts;
+using Common.Filtration;
 using Domain.Entities;
 using Services.DTOs;
 
@@ -24,10 +25,15 @@ namespace Business.Services.Implementation
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public async void DeleteBookAsync(int id)
+        public async Task DeleteBookAsync(int id)
         {
             await _unitOfWork.BooksRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();
+        }
+
+        public Task<List<GetBookDTO>> FilterBooksAsync(BookSearchCriteria searchCriteria)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<List<GetBookDTO>> GetAllBooksAsync()
@@ -42,6 +48,20 @@ namespace Business.Services.Implementation
             return bookDtos;
         }
 
+        public async Task<List<GetBookDTO>> GetAvailableBooksAsync()
+        {
+            IQueryable<Book> books = await _unitOfWork.BooksRepository.GetAllAsync();
+            books = books.Where(book => book.IsAvailable == true);
+            return _mapper.Map<List<GetBookDTO>>(books.ToList());
+        }
+
+        public async Task<List<GetBookDTO>> GetBorrowedBooksAsync()
+        {
+            IQueryable<Book> books = await _unitOfWork.BooksRepository.GetAllAsync();
+            books = books.Where(book => book.IsAvailable == false);
+            return _mapper.Map<List<GetBookDTO>>(books.ToList());
+        }
+
         public async Task<GetBookDTO?> GetBookByIdAsync(int id)
         {
             Book? book = await _unitOfWork.BooksRepository.GetByIdAsync(id);
@@ -53,7 +73,7 @@ namespace Business.Services.Implementation
         public async Task UpdateBookAsync(int id, AddBookDTO book)
         {
             Book exisitingBook = _mapper.Map<Book>(book);
-            await _unitOfWork.BooksRepository.UpdateAsync(id, exisitingBook);
+            await _unitOfWork.BooksRepository.UpdateAsync(exisitingBook, id);
 
             await _unitOfWork.SaveChangesAsync();
 

@@ -10,10 +10,10 @@ namespace Common.Contracts
 {
     public interface IUnitOfWork
     {
-        public IRepository<Book> BooksRepository { get; }
+        public IBookRepository BooksRepository { get; }
 
         public IAuthorRepository AuthorsRepository { get; }
-        public IRepository<BorrowingRecord> BorrowRepository { get; }
+        public IBorrowRepository BorrowRepository { get; }
 
         public Task SaveChangesAsync();
     }

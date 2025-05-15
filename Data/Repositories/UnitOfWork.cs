@@ -7,21 +7,21 @@ namespace Data.Repositories
     public class UnitOfWork : IUnitOfWork
     {
         private readonly LibraryDbContext context;
-        private IRepository<Book>? books;
+        private IBookRepository? books;
         private IAuthorRepository? authors;
-        private IRepository<BorrowingRecord>? borrows;
+        private IBorrowRepository? borrows;
 
         public UnitOfWork(LibraryDbContext context)
         {
             this.context = context;
         }
-        public IRepository<Book> BooksRepository
+        public IBookRepository BooksRepository
         {
             get
             {
                 if (books == null)
                 {
-                    books = new Repository<Book>(context);
+                    books = new BookRepository(context);
                 }
                 return books;
             }
@@ -39,13 +39,13 @@ namespace Data.Repositories
             }
         }
 
-        public IRepository<BorrowingRecord> BorrowRepository
+        public IBorrowRepository BorrowRepository
         {
             get
             {
                 if (borrows == null)
                 {
-                    borrows = new Repository<BorrowingRecord>(context);
+                    borrows = new BorrowRepository(context);
                 }
                 return borrows;
             }

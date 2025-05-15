@@ -3,6 +3,7 @@ using Business.Contracts;
 using Business.DTOs;
 using Business.Services.Contracts;
 using Common.Exceptions;
+using Common.Filtration;
 using Data;
 using Domain.Enums;
 using Library_System.ViewModels;
@@ -107,21 +108,34 @@ namespace Library_System.Controllers
 
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                bookService.DeleteBookAsync(id);
+                await bookService.DeleteBookAsync(id);
                 TempData["success"] = "Book Deleted Successfully";
                 return RedirectToAction("Index");
             }
-            catch (NotFoundException ex)
+            catch (Exception ex)
             {
-                // Handle exceptioncv
-                TempData["error"] = ex.Message;
-                //return RedirectToAction("Index");
-                return View("Error", new ErrorViewModel { ErrorMessage = ex.Message });
+                return View("Error", new ErrorViewModel { Type= ex.GetType().Name, ErrorMessage = ex.Message });
             }
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            GetBookDTO? book = await bookService.GetBookByIdAsync(id);
+            if(book == null)
+            {
+                return NotFound();
+            }
+            var bookViewModel = mapper.Map<GetBookViewModel>(book);
+            return PartialView("_BookDetailPartial", bookViewModel);
+        }
+
+        public async Task<IActionResult> FilterBooks(BookSearchCriteria searchCriteria)
+        {
+            return View();
         }
     }
 }

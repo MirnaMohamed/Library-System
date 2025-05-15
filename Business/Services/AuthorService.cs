@@ -84,7 +84,7 @@ namespace Business.Services.Implementation
         public async Task UpdateAuthorAsync(int id, AuthorDTO author)
         {
             Author exisitingAuthor = mapper.Map<Author>(author);
-            await unitOfWork.AuthorsRepository.UpdateAsync(id, exisitingAuthor);
+            await unitOfWork.AuthorsRepository.UpdateAsync(exisitingAuthor, id);
             
             await unitOfWork.SaveChangesAsync();
 

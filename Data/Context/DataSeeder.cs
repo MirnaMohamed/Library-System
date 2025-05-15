@@ -50,7 +50,8 @@ namespace Data.Context
                     Title = "Wuthering Heights",
                     Genre = Genre.ROMANCE,
                     Description = "A tale of passion and revenge set on the Yorkshire moors.",
-                    AuthorId = authors[random.Next(authors.Count)].Id
+                    AuthorId = authors[random.Next(authors.Count)].Id,
+                    IsAvailable=false
                 },
                 new Book
                 {
@@ -71,7 +72,8 @@ namespace Data.Context
                     Title = "The Poetry of Nature",
                     Genre = Genre.POETRY,
                     Description = "A collection of poems celebrating the beauty of the natural world.",
-                    AuthorId = authors[random.Next(authors.Count)].Id
+                    AuthorId = authors[random.Next(authors.Count)].Id,
+                    IsAvailable=false
                 },
                 new Book
                 {

@@ -1,4 +1,5 @@
 ﻿using Business.DTOs;
+using Common.Filtration;
 using Services.DTOs;
 
 namespace Business.Services.Contracts
@@ -9,6 +10,9 @@ namespace Business.Services.Contracts
         Task<GetBookDTO?> GetBookByIdAsync(int id);
         Task CreateBookAsync(AddBookDTO book);
         Task UpdateBookAsync(int id, AddBookDTO book);
-        void DeleteBookAsync(int id);
+        Task DeleteBookAsync(int id);
+        Task<List<GetBookDTO>> FilterBooksAsync(BookSearchCriteria searchCriteria);
+        Task<List<GetBookDTO>> GetAvailableBooksAsync();
+        Task<List<GetBookDTO>> GetBorrowedBooksAsync();
     }
 }

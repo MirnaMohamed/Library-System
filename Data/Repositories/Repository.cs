@@ -34,24 +34,19 @@ namespace Data.Repositories
             }
         }
 
-        public async Task<bool> Exists(int id) 
-        {
-            T? entity = await context.Set<T>().FindAsync(id);
-            return entity != null;
-        }
 
         public async Task<IQueryable<T>> GetAllAsync()
         {
             return await Task.FromResult(context.Set<T>().AsQueryable());
         }
 
-        public async Task<T?> GetByIdAsync(int id)
+        public async virtual Task<T?> GetByIdAsync(int id)
         {
             T? entity = await context.Set<T>().FindAsync(id);
             return entity;
         }
 
-        public async Task UpdateAsync(int id, T entity)
+        public async virtual Task UpdateAsync( T entity, params object[] id)
         {
             var existing = await context.Set<T>().FindAsync(id);
             if (existing != null)
