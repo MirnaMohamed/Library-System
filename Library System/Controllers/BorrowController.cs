@@ -5,6 +5,7 @@ using Common.Contracts;
 using Domain.Entities;
 using Library_System.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Services.DTOs;
 
 namespace Library_System.Controllers
 {
@@ -47,20 +48,21 @@ namespace Library_System.Controllers
             return View(records);
         }
 
-        public async Task<IActionResult> SwitchAvailability(int id)
-        {
-            var book = await bookService.GetBookByIdAsync(id);
-            book.IsAvailable = false;
-            await bookService.UpdateBookAsync(id, book);
-
-            return Json(true);
-        }
 
         public async Task<IActionResult> ReturnBook()
         {
             var books = await bookService.GetBorrowedBooksAsync();
             ViewBag.Books = mapper.Map<List<GetBookViewModel>>(books);
             return View("Create");
+        }
+
+        public async void GetAvailability(int BookId)
+        {
+            var book = await bookService.GetBookByIdAsync(BookId);
+            if(book != null)
+                book.IsAvailable = false;
+            
+            await bookService.UpdateBookAsync(BookId, mapper.Map<AddBookDTO>(book));
         }
     }
 }

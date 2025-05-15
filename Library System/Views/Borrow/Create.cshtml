@@ -35,11 +35,13 @@
 
                     if (data.isAvailable) {
                         statusElement.textContent = "Available";
-                        statusElement.className = "text-success";
+                        statusElement.classList.remove("text-danger");
+                        statusElement.classList.add("text-success");
                         borrowBtn.disabled = false;
                     } else {
                         statusElement.textContent = "Checked Out";
-                        statusElement.className = "text-danger";
+                        statusElement.classList.remove("text-success");
+                        statusElement.classList.add("text-danger");
                         borrowBtn.disabled = true;
                     }
                 });
