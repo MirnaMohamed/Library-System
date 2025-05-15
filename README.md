@@ -9,8 +9,7 @@ A web-based Library Management System built with ASP.NET Core (.NET 8), Entity F
 - **Book Management**: Add, edit, delete, and list books with genre and author assignment.
 - **Author Management**: Add, edit, delete, and list authors with full name and biography.
 - **Borrowing System**: Request and return books, track borrowing records.
-- **Validation**: Client-side and server-side validation for all forms.
-- **Notifications**: Toastr notifications for success and error messages.
+- **Validation**: Client-side and server-side validation for all forms.\
 - **Dynamic Dropdowns**: Genre and author selection in book forms.
 - **AJAX/Fetch**: Real-time book availability checks before borrowing.
 - **Seeding**: In-memory database seeding for development/testing.
@@ -22,8 +21,7 @@ A web-based Library Management System built with ASP.NET Core (.NET 8), Entity F
 - **.NET 8 / ASP.NET Core MVC**
 - **Entity Framework Core (In-Memory)**
 - **AutoMapper**
-- **Blazor (for future UI expansion)**
-- **jQuery, jQuery Validation, Toastr.js**
+- **jQuery, jQuery Validation**
 - **Bootstrap 4/5 (for styling)**
 
 ---
