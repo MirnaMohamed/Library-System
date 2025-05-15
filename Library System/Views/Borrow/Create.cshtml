@@ -28,23 +28,6 @@
             if (!bookId) return;
 
             fetch(`/Books/GetAvailability?id=${bookId}`)
-                .then(response => response.json())
-                .then(data => {
-                    let statusElement = document.getElementById("availabilityStatus");
-                    let borrowBtn = document.getElementById("borrowBtn");
-
-                    if (data.isAvailable) {
-                        statusElement.textContent = "Available";
-                        statusElement.classList.remove("text-danger");
-                        statusElement.classList.add("text-success");
-                        borrowBtn.disabled = false;
-                    } else {
-                        statusElement.textContent = "Checked Out";
-                        statusElement.classList.remove("text-success");
-                        statusElement.classList.add("text-danger");
-                        borrowBtn.disabled = true;
-                    }
-                });
         });
     </script>
 }
